@@ -1,0 +1,18 @@
+python3 train.py \
+  --model_name_or_path NlpHUST/electra-base-vn \
+  --train_file datasets/train2.json \
+  --validation_file datasets/train2.json \
+  --output_dir outputs/train \
+  --do_train \
+  --do_eval \
+  --num_train_epochs 200 \
+  --max_seq_length 512 \
+  --pad_to_max_length \
+  --per_device_train_batch_size 8 \
+  --per_device_eval_batch_size 8 \
+  --gradient_accumulation_steps 1 \
+  --logging_strategy steps\
+  --logging_steps 100 \
+  --evaluation_strategy epoch \
+  --save_strategy epoch \
+  --overwrite_output_dir

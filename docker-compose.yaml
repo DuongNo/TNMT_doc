@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: fastapi.dockerfile
+    restart: always
+    ports:
+      - 8008:10000
+    volumes:
+      - shared_data:/app/static
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:admin@db:5432/postgres
+  db:
+    image: postgres:15-alpine
+    restart: always
+    # notice here, D:\workspace should be written as: /d/workspace
+    volumes:
+      - /home/mrtuan/docker/postgres30:/var/lib/postgresql/data
+    command: "postgres"
+    ports:
+      - "5445:5432"
+    stdin_open: true
+    tty: true
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+volumes:
+  shared_data:
